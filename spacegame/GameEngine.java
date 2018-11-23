@@ -155,17 +155,17 @@ public class GameEngine {
      * height attributes of the level specified by GRID_WIDTH and GRID_HEIGHT.
      */
     private TileType[][] generateLevel() {
-        TileType[][] mapLevel = new TileType[GRID_WIDTH][GRID_HEIGHT];
+        tiles = new TileType[GRID_WIDTH][GRID_HEIGHT];
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
-                mapLevel[i][j] = TileType.SPACE;
+                tiles[i][j] = TileType.SPACE;
             }
         }
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 double r = Math.random();
                 if (r <= BLACK_HOLE_CHANCE) {
-                    mapLevel[i][j] = TileType.BLACK_HOLE;
+                    tiles[i][j] = TileType.BLACK_HOLE;
                 }
 
             }
@@ -174,12 +174,12 @@ public class GameEngine {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 double r = Math.random();
                 if (r <= PULSAR_CHANCE) {
-                    mapLevel[i][j] = TileType.PULSAR_INACTIVE;
+                    tiles[i][j] = TileType.PULSAR_INACTIVE;
                 }
 
             }
         }
-        return mapLevel;
+        return tiles;
     }
 
     /**
@@ -192,22 +192,22 @@ public class GameEngine {
      * @return An ArrayList containing Point objects representing suitable X and
      * Y co-ordinates in the current level that entities can be spawned in.
      */
-    private ArrayList<Point> getSpawns(TileType[][] mapLevel) {
-        ArrayList<Point> s = new ArrayList<Point>(); 
+    private ArrayList<Point> getSpawns() {
+        ArrayList<Point> spawns = new ArrayList<Point>(); 
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {                
-                if (mapLevel[i][j] == SPACE) {                    
+                if (tiles[i][j] == SPACE) {                    
                     int x = i;
                     int y = j;
                     Point position = new Point(x, y);
-                    s.add(position);
+                    spawns.add(position);
                     
                 }
 
             }
         }
         //add code here to generate Point objects witrh suitable X and Y co-ordinates
-        return s;
+        return spawns;
     }
 
     /**
@@ -235,8 +235,12 @@ public class GameEngine {
      * @return A Player object representing the player in the game
      */
     private Player spawnPlayer() {
+        player = new Player(10, 10, 10);
         int r = (int) Math.random();
-        s.get(r);
+        spawns.get(r);
+//        player.maxHull = 10;
+//        player.hullStrength = 10;
+//        player.setPosition(5, 5);
         return player;
     }
 
