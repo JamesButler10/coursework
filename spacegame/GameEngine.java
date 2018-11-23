@@ -238,9 +238,6 @@ public class GameEngine {
         player = new Player(10, 10, 10);
         int r = (int) Math.random();
         spawns.get(r);
-//        player.maxHull = 10;
-//        player.hullStrength = 10;
-//        player.setPosition(5, 5);
         return player;
     }
 
